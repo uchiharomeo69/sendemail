@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Controller, Get } from '@nestjs/common';
 import {
   Ctx,
   EventPattern,
@@ -15,12 +15,12 @@ export class AppController {
 
   @Get()
   hello(): string {
-    return 'lalas';
+    return 'lala';
   }
-
-  @Post()
-  async getHello(@Body() data) {
+  @EventPattern('register')
+  async getHello(data) {
     const { email, name, url } = data;
+    console.log(data);
 
     await this.mailerService.sendMail({
       to: `${email}`,
@@ -31,5 +31,12 @@ export class AppController {
         url,
       },
     });
+  }
+
+  @MessagePattern('test')
+  async test(@Payload() data: any, @Ctx() context: RmqContext) {
+    console.log('zz');
+
+    return 'aa';
   }
 }
