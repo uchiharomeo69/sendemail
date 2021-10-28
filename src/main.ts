@@ -13,7 +13,7 @@ async function bootstrap() {
           'amqps://xdtsxklg:wNcUIVNIbbBzqfhUnQKDQkVS_E84DUDR@cattle.rmq2.cloudamqp.com/xdtsxklg',
         ],
         queue: 'notification_queue',
-        noAck: false,
+        noAck: true,
         queueOptions: {
           durable: false,
         },
